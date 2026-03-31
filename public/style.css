@@ -5,27 +5,29 @@
     box-sizing: border-box;
 }
 
-/* 🌌 BODY BACKGROUND */
+/* 🌌 BODY */
 body {
     font-family: 'Segoe UI', sans-serif;
     background: radial-gradient(circle at top, #0f172a, #020617);
     color: white;
     overflow-x: hidden;
+    padding: 0 10px;
 }
 
 /* 🔝 NAVBAR */
 .navbar {
     position: fixed;
-    top: 20px;
+    top: 15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
+    width: 90%;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
-    padding: 15px 30px;
+    padding: 12px 20px;
 
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(15px);
@@ -36,7 +38,7 @@ body {
 }
 
 .logo {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -47,7 +49,7 @@ body {
 .navbar ul {
     list-style: none;
     display: flex;
-    gap: 25px;
+    gap: 20px;
 }
 
 .navbar li {
@@ -61,21 +63,20 @@ body {
     color: #38bdf8;
 }
 
-/* 🚀 HERO SECTION */
+/* 🚀 HERO */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     text-align: center;
-    padding: 0 20px;
+    padding: 120px 15px 40px;
 }
 
-/* BIG HEADING */
 .hero h1 {
-    font-size: 60px;
+    font-size: clamp(32px, 6vw, 60px);
     font-weight: 800;
 
     background: linear-gradient(90deg, #38bdf8, #a78bfa);
@@ -83,37 +84,37 @@ body {
     color: transparent;
 }
 
-/* DESCRIPTION */
 .hero p {
     margin-top: 20px;
-    width: 50%;
+    width: min(90%, 600px);
     opacity: 0.7;
     line-height: 1.6;
 }
 
-/* BUTTONS */
+/* 🔘 BUTTONS */
 .buttons {
     margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
 }
 
-/* PRIMARY BUTTON */
 .primary {
-    padding: 15px 30px;
+    padding: 14px 25px;
     border: none;
     border-radius: 30px;
     background: linear-gradient(90deg, #38bdf8, #6366f1);
     color: white;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
-    margin-right: 15px;
 
     box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
     transition: 0.3s;
 }
 
-/* SECONDARY BUTTON */
 .secondary {
-    padding: 15px 30px;
+    padding: 14px 25px;
     border-radius: 30px;
     border: 1px solid rgba(255,255,255,0.2);
     background: transparent;
@@ -122,38 +123,36 @@ body {
     transition: 0.3s;
 }
 
-/* BUTTON HOVER */
 .primary:hover {
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 .secondary:hover {
     background: rgba(255,255,255,0.1);
 }
 
-/* ⭐ FEATURES SECTION */
+/* ⭐ FEATURES */
 .features {
-    padding: 100px 20px;
+    padding: 80px 20px;
     text-align: center;
 }
 
 .features h2 {
-    font-size: 40px;
-    margin-bottom: 50px;
+    font-size: clamp(26px, 5vw, 40px);
+    margin-bottom: 40px;
 }
 
-/* CARDS CONTAINER */
 .feature-cards {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 20px;
 }
 
-/* GLASS CARD */
 .card {
     width: 260px;
-    padding: 25px;
+    max-width: 90%;
+    padding: 20px;
 
     background: rgba(255,255,255,0.05);
     backdrop-filter: blur(15px);
@@ -164,7 +163,7 @@ body {
 }
 
 .card:hover {
-    transform: translateY(-12px) scale(1.03);
+    transform: translateY(-10px);
 }
 
 .card h3 {
@@ -177,14 +176,14 @@ body {
     line-height: 1.5;
 }
 
-/* 👤 ABOUT SECTION */
+/* 👤 ABOUT */
 .about {
-    padding: 100px 20px;
+    padding: 80px 20px;
     text-align: center;
 }
 
 .about h2 {
-    font-size: 40px;
+    font-size: clamp(26px, 5vw, 40px);
     margin-bottom: 20px;
 }
 
@@ -195,36 +194,10 @@ body {
     line-height: 1.7;
 }
 
-/* ✨ SMOOTH SCROLL */
-html {
-    scroll-behavior: smooth;
-}
-
-/* 📱 RESPONSIVE */
-@media (max-width: 768px) {
-
-    .hero h1 {
-        font-size: 40px;
-    }
-
-    .hero p {
-        width: 90%;
-    }
-
-    .navbar {
-        width: 95%;
-    }
-
-    .feature-cards {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
 /* 🔻 FOOTER */
 .footer {
-    margin-top: 100px;
-    padding: 40px 20px;
+    margin-top: 80px;
+    padding: 30px 15px;
     text-align: center;
 
     background: rgba(255,255,255,0.05);
@@ -242,11 +215,11 @@ html {
     margin-bottom: 15px;
 }
 
-/* Links */
 .footer-links {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
     margin-bottom: 20px;
 }
 
@@ -261,8 +234,35 @@ html {
     color: #38bdf8;
 }
 
-/* Copyright */
 .footer .copyright {
     font-size: 13px;
     opacity: 0.5;
+}
+
+/* 📱 EXTRA MOBILE FIX */
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .primary, .secondary {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .card {
+        width: 100%;
+    }
 }
