@@ -15,7 +15,7 @@ body {
 /* 📦 APP LAYOUT */
 .app {
     display: flex;
-    height: 100vh;
+    height: 100dvh; /* 🔥 mobile fix */
     overflow: hidden;
 }
 
@@ -25,6 +25,7 @@ body {
     background: #020617;
     padding: 20px;
     border-right: 1px solid rgba(255,255,255,0.1);
+
     display: flex;
     flex-direction: column;
 }
@@ -82,16 +83,20 @@ body {
     flex: 1;
     padding: 15px;
     overflow-y: auto;
+
     display: flex;
     flex-direction: column;
+    gap: 6px;
+
+    scroll-behavior: smooth;
 }
 
 /* MESSAGE */
 .message {
     max-width: 70%;
     padding: 12px 15px;
-    border-radius: 12px;
-    margin: 8px 0;
+    border-radius: 16px;
+    margin: 6px 0;
     line-height: 1.6;
     font-size: 14px;
     word-wrap: break-word;
@@ -118,15 +123,21 @@ body {
 
 /* INPUT AREA */
 .input-area {
+    position: sticky;
+    bottom: 0;
+
     display: flex;
     padding: 10px;
     margin: 10px;
-    border-radius: 20px;
+
+    border-radius: 25px;
 
     background: rgba(255,255,255,0.05);
     backdrop-filter: blur(12px);
 
     border: 1px solid rgba(255,255,255,0.1);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
 /* INPUT */
@@ -135,6 +146,7 @@ body {
     padding: 12px 15px;
     border-radius: 25px;
     border: 1px solid rgba(255,255,255,0.1);
+
     outline: none;
     background: rgba(255,255,255,0.05);
     color: white;
@@ -151,38 +163,66 @@ body {
     padding: 10px 14px;
     border: none;
     border-radius: 50%;
+
     background: linear-gradient(135deg, #38bdf8, #6366f1);
     color: white;
+
     cursor: pointer;
+    transition: 0.3s;
 }
 
-/* 📱 MOBILE RESPONSIVE */
+.input-area button:hover {
+    transform: scale(1.1);
+}
+
+/* 📱 MOBILE */
 @media (max-width: 768px) {
 
-    /* ❌ Hide sidebar */
     .sidebar {
         display: none;
     }
 
-    /* Full width chat */
     .chat-section {
         width: 100%;
     }
 
     .header {
         font-size: 14px;
-        padding: 12px;
+        padding: 10px;
+    }
+
+    .chat-box {
+        padding: 10px;
     }
 
     .message {
-        max-width: 85%;
+        max-width: 90%;
         font-size: 13px;
+        padding: 10px 12px;
     }
 
     .input-area {
-        margin: 8px;
-        padding: 8px;
-    }
+    position: fixed;   /* 🔥 sticky → fixed */
+    bottom: 10px;      /* 🔥 thoda upar */
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: calc(100% - 20px);
+    max-width: 900px;
+
+    display: flex;
+    padding: 10px;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
 
     .input-area input {
         font-size: 13px;
@@ -190,6 +230,29 @@ body {
     }
 
     .input-area button {
-        padding: 8px 12px;
+        padding: 8px 10px;
     }
+}
+
+/* 📱 EXTRA SMALL */
+@media (max-width: 400px) {
+
+    .message {
+        max-width: 95%;
+        font-size: 12px;
+    }
+
+    .input-area input {
+        font-size: 12px;
+    }
+}
+
+/* 🔥 SCROLLBAR */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #38bdf8;
+    border-radius: 10px;
 }
