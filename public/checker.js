@@ -1,15 +1,48 @@
-// TEXT CHECK
+// 🌐 BASE URL (AUTO FIX)
+const BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5000"
+    : "https://eduguarda.onrender.com";
+
+
+// 🎨 RESULT UI FUNCTION (REUSABLE 🔥)
+function renderResult(resultBox, probability, message) {
+
+    // 🔥 color logic
+    let color = probability > 70 ? "#ef4444" : "#22c55e";
+
+    resultBox.innerHTML = `
+        <div class="result-card">
+            <h3>${probability}% AI</h3>
+
+            <div class="progress-container">
+                <div class="progress-bar" 
+                     style="width:0%; background:${color}">
+                </div>
+            </div>
+
+            <p>${message}</p>
+        </div>
+    `;
+
+    // 🔥 smooth animation
+    const bar = resultBox.querySelector(".progress-bar");
+    setTimeout(() => {
+        bar.style.width = probability + "%";
+    }, 100);
+}
+
+
+// 📝 TEXT CHECK
 async function checkText() {
     const text = document.getElementById("textInput").value.trim();
     const resultBox = document.getElementById("resultBox");
-    const BASE_URL = window.location.origin;
 
     if (!text) {
         alert("Enter text first!");
         return;
     }
 
-    resultBox.innerHTML = "⏳ Checking text...";
+    resultBox.innerHTML = `<p class="loading">⏳ Checking text...</p>`;
 
     try {
         const res = await fetch(`${BASE_URL}/api/check/text`, {
@@ -22,18 +55,20 @@ async function checkText() {
 
         const data = await res.json();
 
-        resultBox.innerHTML = `
-            <p><b>Result:</b> ${data.message}</p>
-            <p><b>AI Probability:</b> ${data.aiProbability}%</p>
-        `;
+        renderResult(
+            resultBox,
+            data.aiProbability || 0,
+            data.message || "No response"
+        );
 
     } catch (err) {
+        console.error(err);
         resultBox.innerHTML = "⚠️ Error checking text";
     }
 }
 
 
-// IMAGE CHECK
+// 🖼️ IMAGE CHECK
 async function checkImage() {
     const file = document.getElementById("imageInput").files[0];
     const resultBox = document.getElementById("resultBox");
@@ -43,20 +78,27 @@ async function checkImage() {
         return;
     }
 
-    resultBox.innerHTML = "⏳ Checking image...";
+    resultBox.innerHTML = `<p class="loading">⏳ Checking image...</p>`;
 
     try {
+        const formData = new FormData();
+        formData.append("image", file);
+
         const res = await fetch(`${BASE_URL}/api/check/image`, {
-            method: "POST"
+            method: "POST",
+            body: formData
         });
 
         const data = await res.json();
 
-        resultBox.innerHTML = `
-            <p><b>Image Result:</b> ${data.result}</p>
-        `;
+        renderResult(
+            resultBox,
+            data.aiProbability || 0,
+            data.result || "No result"
+        );
 
     } catch (err) {
+        console.error(err);
         resultBox.innerHTML = "⚠️ Error checking image";
     }
 }
