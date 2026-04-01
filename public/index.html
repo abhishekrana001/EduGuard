@@ -6,116 +6,112 @@
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 
-<!-- 🔝 NAVBAR -->
+<div class="particles"></div>
+
 <nav class="navbar">
     <div class="logo">EduGuard <span>AI</span></div>
-    <ul>
-        <li>Home</li>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <ul id="navLinks">
+        <li onclick="scrollToSection('hero')">Home</li>
         <li onclick="scrollToSection('features')">Features</li>
         <li onclick="scrollToSection('about')">About</li>
+        <li onclick="scrollToSection('team')">Team</li>
+        <li onclick="scrollToSection('contact')">Contact</li>
     </ul>
 </nav>
 
-<!-- 🚀 HERO -->
-<section class="hero">
-    <h1>Smart Academic<br>Integrity System</h1>
+<!-- HERO -->
+<section id="hero" class="hero reveal">
+    <div class="container">
+        <h1>Smart Academic<br>Integrity System</h1>
 
-    <p>
-        Detect AI-generated assignments, verify originality,  
-        and get instant academic insights with EduGuard AI.
-    </p>
-
-    <div class="buttons">
-        <button class="primary" onclick="goToChat()">🤖 Assistant</button>
-        <button class="secondary" onclick="goToChecker()">🔍 Integrity</button>
-    </div>
-</section>
-
-<!-- ⭐ FEATURES -->
-<section id="features" class="features">
-    <h2>Powerful Features</h2>
-
-    <div class="feature-cards">
-
-        <div class="card">
-            <h3>🤖 AI Assistant</h3>
-            <p>Get instant academic help, explanations, and smart answers powered by AI.</p>
-        </div>
-
-        <div class="card">
-            <h3>📝 Text Integrity Check</h3>
-            <p>Analyze assignments and detect AI-generated or copied content with smart scoring.</p>
-        </div>
-
-        <div class="card">
-            <h3>🖼️ Image Analysis</h3>
-            <p>Upload handwritten or printed work and verify authenticity using AI image detection.</p>
-        </div>
-
-        <div class="card">
-            <h3>⚡ Fast & Accurate</h3>
-            <p>Get results in seconds with reliable AI-powered analysis and insights.</p>
-        </div>
-
-    </div>
-</section>
-
-<!-- 👤 ABOUT -->
-<section id="about" class="about">
-    <h2>About EduGuard AI</h2>
-
-    <p>
-        EduGuard AI is a smart academic integrity platform designed to help students, teachers, 
-        and institutions maintain honesty in education. With advanced AI capabilities, it detects 
-        AI-generated content, checks originality, and provides intelligent assistance for learning.
-    </p>
-
-    <p>
-        Our mission is to build a future where technology supports education without compromising 
-        integrity. EduGuard AI empowers users with transparency, trust, and smarter learning tools.
-    </p>
-</section>
-
-<!-- ⚙️ SCRIPT -->
-<script>
-function goToChat() {
-    window.location.href = "chat.html";
-}
-
-function goToChecker() {
-    window.location.href = "checker.html";
-}
-
-function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-}
-</script>
-
-<!-- 🔻 FOOTER -->
-<footer class="footer">
-
-    <div class="footer-content">
-
-        <h2>EduGuard AI</h2>
-        <p>Ensuring Academic Integrity in the Age of AI</p>
-
-        <div class="footer-links">
-            <span onclick="scrollToSection('features')">Features</span>
-            <span onclick="scrollToSection('about')">About</span>
-            <span onclick="goToChat()">Assistant</span>
-            <span onclick="goToChecker()">Integrity Checker</span>
-        </div>
-
-        <p class="copyright">
-            © 2026 EduGuard AI | All Rights Reserved
+        <p>
+            Detect AI-generated assignments, verify originality, <br> and get instant academic insights with EduGuard AI.
         </p>
 
+        <div class="buttons">
+            <button class="primary" onclick="goToChat()">🤖 Assistant</button>
+            <button class="secondary" onclick="goToChecker()">🔍 Integrity</button>
+        </div>
     </div>
+</section>
 
+<!-- FEATURES -->
+<section id="features" class="features reveal">
+    <div class="container">
+        <h2>Powerful Features</h2>
+
+        <div class="feature-cards">
+            <div class="card"><h3>🤖 AI Assistant</h3><p>Smart AI help</p></div>
+            <div class="card"><h3>📝 Integrity Check</h3><p>Detect AI content</p></div>
+            <div class="card"><h3>🖼️ Image Analysis</h3><p>Verify work</p></div>
+            <div class="card"><h3>⚡ Fast</h3><p>Quick results</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about reveal">
+    <div class="container">
+        <div class="about-container">
+            <h2>About EduGuard AI</h2>
+            <p>EduGuard AI helps maintain academic honesty using smart AI tools.</p>
+            <p>Our mission is to support education without compromising integrity.</p>
+        </div>
+    </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="team reveal">
+    <div class="container">
+        <h2>👥 Our Team</h2>
+
+        <div class="team-cards">
+            <div class="team-card"><div class="avatar">CS</div><h3>Charanjit Singh</h3><p>Leader</p></div>
+            <div class="team-card"><div class="avatar">AR</div><h3>Abhishek Rana</h3><p>Developer</p></div>
+            <div class="team-card"><div class="avatar">SS</div><h3>Sarbjeet</h3><p>Developer</p></div>
+            <div class="team-card"><div class="avatar">JK</div><h3>Jashanpreet</h3><p>Developer</p></div>
+            <div class="team-card"><div class="avatar">GK</div><h3>Gagandeep</h3><p>Developer</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact reveal">
+    <div class="container">
+        <h2>Contact Us</h2>
+        <p>
+        Have questions or need support? We're here to help.  
+        Reach out anytime and our team will get back to you as soon as possible.
+        </p>
+        <div class="contact-container">
+            <div class="contact-form">
+                <input type="text" placeholder="Your Name">
+                <input type="email" placeholder="Your Email">
+                <textarea placeholder="Your Message"></textarea>
+                <button>Send Message ➤</button>
+            </div>
+
+            <div class="contact-info">
+                <h3>📬 Get in Touch</h3>
+                <div class="info-item">📧 eduguardai@gmail.com</div>
+                <div class="info-item">📞 +91 XXXXX XXXXX</div>
+                <div class="info-item">📍 Punjab, India</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <h2>EduGuard AI</h2>
+        <p>Ensuring Academic Integrity in the Age of AI</p>
+    </div>
 </footer>
-
-
+<script src="script.js"></script>
 </body>
 </html>

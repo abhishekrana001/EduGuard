@@ -7,16 +7,15 @@
 
 /* 🌌 BODY */
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Inter', sans-serif;
     background: #0f172a;
-    color: white;
+    color: #e5e7eb;
 }
 
-/* 📦 APP LAYOUT */
+/* 📦 APP */
 .app {
     display: flex;
-    height: 100dvh; /* 🔥 mobile fix */
-    overflow: hidden;
+    height: 100dvh;
 }
 
 /* 📂 SIDEBAR */
@@ -24,25 +23,29 @@ body {
     width: 260px;
     background: #020617;
     padding: 20px;
-    border-right: 1px solid rgba(255,255,255,0.1);
 
-    display: flex;
-    flex-direction: column;
+    border-right: 1px solid rgba(255,255,255,0.08);
 }
 
+/* spacing improve */
 .sidebar h2 {
     margin-bottom: 15px;
+    font-size: 15px;
 }
 
+/* NEW CHAT */
 .sidebar button {
-    width: 100%;
     padding: 10px;
-    border: none;
-    background: #38bdf8;
-    color: white;
     border-radius: 8px;
+    border: none;
+    background: #111827;
+    color: white;
     cursor: pointer;
     margin-bottom: 15px;
+}
+
+.sidebar button:hover {
+    background: #1f2937;
 }
 
 /* HISTORY */
@@ -51,16 +54,15 @@ body {
     overflow-y: auto;
 }
 
-.history ul {
-    list-style: none;
-    margin-top: 10px;
-}
-
 .history li {
     padding: 8px;
-    font-size: 14px;
-    opacity: 0.8;
-    cursor: pointer;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #cbd5e1;
+}
+
+.history li:hover {
+    background: #1f2937;
 }
 
 /* 💬 CHAT SECTION */
@@ -72,123 +74,145 @@ body {
 
 /* HEADER */
 .header {
-    padding: 15px;
-    text-align: center;
-    background: rgba(255,255,255,0.05);
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 14px;
+    background: #020617;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-/* CHAT BOX */
+/* MENU LEFT */
+.menu-btn {
+    position: absolute;
+    left: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* CHAT BOX (CENTERED LIKE CHATGPT 🔥) */
 .chat-box {
     flex: 1;
-    padding: 15px;
-    overflow-y: auto;
-
     display: flex;
     flex-direction: column;
-    gap: 6px;
-
-    scroll-behavior: smooth;
+    align-items: stretch;
+    padding: 20px;
+    overflow-y: auto;
 }
 
-/* MESSAGE */
+/* INNER CONTAINER */
+.chat-box-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    align-items: stretch; /* ✅ important */
+}
+
+/* MESSAGE BASE */
 .message {
-    max-width: 70%;
-    padding: 12px 15px;
-    border-radius: 16px;
+    width: fit-content;
+    max-width: 75%;
+    padding: 12px 16px;
+    border-radius: 12px;
     margin: 6px 0;
-    line-height: 1.6;
+}
+/* Welcome */
+
+.welcome {
+    margin-top: 100px;
+    opacity: 0.5;
     font-size: 14px;
-    word-wrap: break-word;
+    text-align: center;
 }
 
 /* USER */
 .user {
-    background: linear-gradient(135deg, #38bdf8, #6366f1);
+    margin-left: auto;
+    background: #2563eb;
+    color: white;
     align-self: flex-end;
+    max-width: 100%;
 }
 
 /* BOT */
 .bot {
-    background: rgba(255,255,255,0.08);
+    background: #1e293b;
+    color: #e5e7eb;
     align-self: flex-start;
+    max-width: 100%;
+    margin-right: auto;
 }
 
-/* TEXT FORMAT */
-.bot h3 {
-    margin: 10px 0 5px;
-    font-size: 15px;
-    color: #38bdf8;
-}
-
-/* INPUT AREA */
+/* INPUT AREA (CHATGPT STYLE 🔥) */
 .input-area {
     position: sticky;
     bottom: 0;
 
     display: flex;
-    padding: 10px;
-    margin: 10px;
+    justify-content: center;
 
-    border-radius: 25px;
+    padding: 15px;
+    background: #0f172a;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
 
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(12px);
-
-    border: 1px solid rgba(255,255,255,0.1);
-
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+/* INPUT CONTAINER */
+.input-box {
+    display: flex;
+    width: 100%;
+    max-width: 750px;
+    gap: 10px;
 }
 
 /* INPUT */
-.input-area input {
+.input-box input {
     flex: 1;
-    padding: 12px 15px;
-    border-radius: 25px;
-    border: 1px solid rgba(255,255,255,0.1);
-
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
     outline: none;
-    background: rgba(255,255,255,0.05);
+    background: #020617;
     color: white;
-    font-size: 14px;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-.input-area input::placeholder {
-    color: rgba(255,255,255,0.5);
+/* FOCUS */
+.input-box input:focus {
+    border-color: #2563eb;
 }
 
 /* BUTTON */
-.input-area button {
-    margin-left: 8px;
-    padding: 10px 14px;
+.input-box button {
+    padding: 10px 16px;
+    border-radius: 10px;
     border: none;
-    border-radius: 50%;
-
-    background: linear-gradient(135deg, #38bdf8, #6366f1);
+    background: #2563eb;
     color: white;
-
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.input-area button:hover {
-    transform: scale(1.1);
+/* HOVER */
+.input-box button:hover {
+    background: #1d4ed8;
 }
 
 /* 📱 MOBILE */
 @media (max-width: 768px) {
 
     .sidebar {
-        display: none;
+        position: fixed;
+        left: -260px;
+        top: 0;
+        height: 100%;
+        z-index: 1000;
+        transition: 0.3s;
     }
 
-    .chat-section {
-        width: 100%;
-    }
-
-    .header {
-        font-size: 14px;
-        padding: 10px;
+    .sidebar.active {
+        left: 0;
     }
 
     .chat-box {
@@ -196,63 +220,31 @@ body {
     }
 
     .message {
-        max-width: 90%;
         font-size: 13px;
-        padding: 10px 12px;
+    }
+
+    .user {
+        max-width: 85%;
     }
 
     .input-area {
-    position: fixed;   /* 🔥 sticky → fixed */
-    bottom: 10px;      /* 🔥 thoda upar */
-
-    left: 50%;
-    transform: translateX(-50%);
-
-    width: calc(100% - 20px);
-    max-width: 900px;
-
-    display: flex;
-    padding: 10px;
-
-    border-radius: 25px;
-
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(12px);
-
-    border: 1px solid rgba(255,255,255,0.1);
-
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-}
-
-    .input-area input {
-        font-size: 13px;
         padding: 10px;
     }
 
-    .input-area button {
-        padding: 8px 10px;
+    .input-box {
+        width: 100%;
+    }
+
+    .input-box input {
+        font-size: 13px;
+        padding: 12px;
     }
 }
 
-/* 📱 EXTRA SMALL */
+/* 📱 SMALL */
 @media (max-width: 400px) {
 
     .message {
-        max-width: 95%;
         font-size: 12px;
     }
-
-    .input-area input {
-        font-size: 12px;
-    }
-}
-
-/* 🔥 SCROLLBAR */
-::-webkit-scrollbar {
-    width: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #38bdf8;
-    border-radius: 10px;
 }
