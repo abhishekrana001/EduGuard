@@ -2,78 +2,87 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const axios = require("axios");
+require("dotenv").config();
 
-// 📦 Multer setup
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
+
+const API_URL = "https://models.inference.ai.azure.com/chat/completions";
 
 
 // =====================
-// 🧠 TEXT CHECK (AI)
+// 🧠 TEXT CHECK (GPT)
 // =====================
 router.post("/text", async (req, res) => {
     const { text } = req.body;
 
     if (!text) {
         return res.status(400).json({
-            message: "No text provided",
-            aiProbability: 0
+            aiProbability: 0,
+            message: "No text provided"
         });
     }
 
     try {
         const response = await axios.post(
-            "https://models.inference.ai.azure.com/chat/completions",
+            API_URL,
             {
                 model: "gpt-4o-mini",
                 messages: [
                     {
                         role: "system",
-                        content: "You are an AI detection tool. Analyze the text and respond ONLY in this format: Probability: XX% | Reason: short explanation."                    },
+                        content:
+                            "You are an AI detector. STRICTLY reply in this format only: Probability: XX% | Reason: short explanation. No extra text."
+                    },
                     {
                         role: "user",
                         content: text
                     }
-                ]
+                ],
+                max_tokens: 200
             },
             {
                 headers: {
                     "Authorization": `Bearer ${process.env.GITHUB_TOKEN}`,
                     "Content-Type": "application/json"
-                }
+                },
+                timeout: 15000
             }
         );
 
-        const reply = response.data.choices[0].message.content;
+        const reply = response.data?.choices?.[0]?.message?.content || "";
 
-        // 🔥 Extract number using regex
-        const match = reply.match(/(\d+)%/);
-        const probability = match ? parseInt(match[1]) : 0;
+        console.log("TEXT AI RESPONSE:", reply);
+
+        // 🔥 % extract (safe)
+        const match = reply.match(/(\d{1,3})\s*%/);
+        const probability = match ? Math.min(100, parseInt(match[1])) : 50;
 
         res.json({
-            message: reply,
-            aiProbability: "AI Analysis"
+            aiProbability: probability,
+            message: reply || "No response from AI"
         });
 
     } catch (error) {
-        console.log("❌ TEXT ERROR:", error.response?.data || error.message);
+        console.log("TEXT ERROR:", error.response?.data || error.message);
 
         res.status(500).json({
-            message: "AI detection failed",
-            aiProbability: 0
+            aiProbability: 0,
+            message: "AI detection failed"
         });
     }
 });
 
 
 // =====================
-// 🖼️ IMAGE CHECK (AI)
+// 🖼️ IMAGE CHECK (GPT)
 // =====================
 router.post("/image", upload.single("image"), async (req, res) => {
 
     if (!req.file) {
         return res.status(400).json({
-            result: "No image received"
+            result: "No image received",
+            aiProbability: 0
         });
     }
 
@@ -81,18 +90,22 @@ router.post("/image", upload.single("image"), async (req, res) => {
         const base64Image = req.file.buffer.toString("base64");
 
         const response = await axios.post(
-            "https://models.inference.ai.azure.com/chat/completions",
+            API_URL,
             {
                 model: "gpt-4o-mini",
                 messages: [
                     {
                         role: "system",
-                        content: "Analyze this image and respond ONLY in this format: Probability: XX% | Reason: short explanation whether it is AI-generated or real."
+                        content:
+                            "You are an AI image detector. STRICTLY reply in format: Probability: XX% | Reason: short explanation."
                     },
                     {
                         role: "user",
                         content: [
-                            { type: "text", text: "Analyze this image" },
+                            {
+                                type: "text",
+                                text: "Check if this image is AI generated"
+                            },
                             {
                                 type: "image_url",
                                 image_url: {
@@ -101,31 +114,36 @@ router.post("/image", upload.single("image"), async (req, res) => {
                             }
                         ]
                     }
-                ]
+                ],
+                max_tokens: 200
             },
             {
                 headers: {
                     "Authorization": `Bearer ${process.env.GITHUB_TOKEN}`,
                     "Content-Type": "application/json"
-                }
+                },
+                timeout: 20000
             }
         );
 
-        const reply = response.data.choices[0].message.content;
+        const reply = response.data?.choices?.[0]?.message?.content || "";
 
-        // 🔥 extract %
-        const match = reply.match(/(\d+)%/);
-        const probability = match ? parseInt(match[1]) : 0;
+        console.log("IMAGE AI RESPONSE:", reply);
+
+        const match = reply.match(/(\d{1,3})\s*%/);
+        const probability = match ? Math.min(100, parseInt(match[1])) : 50;
 
         res.json({
-            result: result
+            aiProbability: probability,
+            result: reply || "No response from AI"
         });
 
     } catch (error) {
-        console.log("❌ IMAGE ERROR:", error.response?.data || error.message);
+        console.log("IMAGE ERROR:", error.response?.data || error.message);
 
         res.status(500).json({
-            result: "Image analysis failed"
+            result: "Image analysis failed",
+            aiProbability: 0
         });
     }
 });
