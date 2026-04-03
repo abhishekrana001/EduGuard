@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz - EduGuard AI</title>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+
+<body>
+
+<div class="particles"></div>
+
+<nav class="navbar">
+    <div class="logo">EduGuard <span>AI</span></div>
+</nav>
+
+<div class="quiz-container">
+
+    <h1>🧠 AI Quiz Generator</h1>
+
+    <div class="input-box">
+        <input type="text" id="topic" placeholder="Enter topic (e.g. Java)">
+        <button onclick="startQuiz()">Start</button>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <button id="submitBtn" onclick="submitQuiz()" class="submit-btn">
+        Submit Quiz
+    </button>
+
+    <div id="result"></div>
+
+</div>
+
+<script src="quiz.js"></script>
+</body>
+</html>

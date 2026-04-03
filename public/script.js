@@ -30,12 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // PAGE NAVIGATION (IMPORTANT 🔥)
     // =========================
     window.goToChat = function () {
-        window.location.href = "chat.html"; // public folder
+        window.location.href = "chat.html";
     };
 
     window.goToChecker = function () {
         window.location.href = "checker.html";
     };
+    window.goToQuiz = function () {
+        window.location.href = "quiz.html";
+    };
+
 
     // =========================
     // SCROLL REVEAL ANIMATION
